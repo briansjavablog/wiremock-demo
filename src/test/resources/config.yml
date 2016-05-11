@@ -1,0 +1,10 @@
+creditCheckUrl: http://localhost:8090
+
+# Change default server ports
+server:
+  applicationConnectors:
+  - type: http
+    port: 8080
+  adminConnectors:
+  - type: http
+    port: 9001
