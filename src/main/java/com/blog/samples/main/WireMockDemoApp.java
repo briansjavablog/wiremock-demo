@@ -1,7 +1,6 @@
 package com.blog.samples.main;
 
 import com.blog.samples.exception.ApplicationExceptionMapper;
-import com.blog.samples.exception.CreditCheckFailedException;
 import com.blog.samples.resource.CustomerResource;
 
 import io.dropwizard.Application;
