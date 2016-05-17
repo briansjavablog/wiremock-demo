@@ -32,12 +32,12 @@ public class CustomerResource {
     }
     
     @POST
-    @Path("/creditcheck")
+    @Path("/perform-customer-credit-check")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes({MediaType.APPLICATION_JSON})
     public Response performCustomerCreditCheck(Customer customer) throws Exception {
     	
-    	WebTarget webTarget = client.target(creditCheckServerUrl + "/creditcheck");    	 
+    	WebTarget webTarget = client.target(creditCheckServerUrl + "/credit-check-api");    	 
     	Response response = webTarget.request().post(Entity.entity(customer, MediaType.APPLICATION_JSON));
     	
     	if(response.getStatus() == 200){

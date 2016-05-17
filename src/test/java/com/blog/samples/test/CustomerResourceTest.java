@@ -50,7 +50,7 @@ public class CustomerResourceTest {
     @Test
     public void testCustomerCreditCheckSuccessResponse() throws Exception {
 
-    	stubFor(post(urlEqualTo("/creditcheck"))
+    	stubFor(post(urlEqualTo("/credit-check-api"))
                 .withHeader("Content-Type", WireMock.equalTo("application/json"))
                 .withRequestBody(WireMock.equalTo(getCustomerJson()))
                 .willReturn(aResponse()
@@ -58,7 +58,7 @@ public class CustomerResourceTest {
                     .withHeader("Content-Type", "application/json")
                     .withBody(getCreditCheckJson())));
     	   	
-    	WebTarget webTarget = client.target("http://localhost:8080/customer/creditcheck");
+    	WebTarget webTarget = client.target("http://localhost:8080/customer/perform-customer-credit-check");
     	Response response = webTarget.request(MediaType.APPLICATION_JSON).
     								  post(Entity.entity(getCustomer(), MediaType.APPLICATION_JSON));
     	
@@ -69,14 +69,14 @@ public class CustomerResourceTest {
     @Test
     public void testCustomerCreditCheckErrorResponse() throws Exception {
 
-    	stubFor(post(urlEqualTo("/creditcheck"))
+    	stubFor(post(urlEqualTo("/credit-check-api"))
                 .withHeader("Content-Type", WireMock.equalTo("application/json"))
                 .withRequestBody(WireMock.equalTo(getCustomerJson()))
                 .willReturn(aResponse()
                     .withStatus(503)
                     .withHeader("Content-Type", "application/json")));
                     
-    	WebTarget webTarget = client.target("http://localhost:8080/customer/creditcheck");
+    	WebTarget webTarget = client.target("http://localhost:8080/customer/perform-customer-credit-check");
     	Response response = webTarget.request(MediaType.APPLICATION_JSON).
     								  post(Entity.entity(getCustomer(), MediaType.APPLICATION_JSON));
     	
@@ -89,7 +89,7 @@ public class CustomerResourceTest {
 
     	int creditCheckServiceDelayMillis = 6000;
     	
-    	stubFor(post(urlEqualTo("/creditcheck"))
+    	stubFor(post(urlEqualTo("/credit-check-api"))
                 .withHeader("Content-Type", WireMock.equalTo("application/json"))
                 .withRequestBody(WireMock.equalTo(getCustomerJson()))
                 .willReturn(WireMock.aResponse()
@@ -98,7 +98,7 @@ public class CustomerResourceTest {
                     .withBody(getCreditCheckJson())
                     .withFixedDelay(creditCheckServiceDelayMillis)));
     	
-    	WebTarget webTarget = client.target("http://localhost:8080/customer/creditcheck");
+    	WebTarget webTarget = client.target("http://localhost:8080/customer/perform-customer-credit-check");
     	
     	long startMillis = DateTime.now().getMillis();
     	Response response = webTarget.request(MediaType.APPLICATION_JSON).
